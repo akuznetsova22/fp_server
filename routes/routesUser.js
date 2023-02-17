@@ -104,7 +104,7 @@ router.post('/login', (req,res) => {
 
     pool.query('SELECT * FROM User where Email=?;',
     email, (err,result) => {
-        // console.log(err); 
+        console.log(result); 
         if (err){
             console.log(err)
             res.send({err: err})

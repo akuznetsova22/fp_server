@@ -25,13 +25,15 @@ router.get('/', (req,res) => {
 router.post('/add', (req,res) => {
     const id = req.session.user[0].id;
     const product = req.body.product;
-
+    console.log(id);
+    console.log(product);
     pool.query('SELECT * FROM Product where Title=?;',
     product, (err,result) => {
         if (err){
             res.send({err: err})
         } 
         if (result){
+            console.log(result)
             const productid = result[0].id
             pool.query('INSERT INTO Shopping_cart values (?,?)',
             [id,productid], (err,result) => {
@@ -47,6 +49,7 @@ router.post('/add', (req,res) => {
 router.post('/delete', (req,res) => {
     const id = req.session.user[0].id;
     const product = req.body.product
+
     pool.query('SELECT * FROM Product where Title=?;',
     product, (err,result) => {
         if (err){
